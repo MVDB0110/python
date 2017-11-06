@@ -1,8 +1,6 @@
 #!/bin/bash
-FILE=`python-master.zip`
 mkdir -p /home/pi/Documents/Python/Miniproject
 sudo apt-get install python-rpi.gpio python3-rpi.gpio -y
-PWD=`pwd`
 wget https://github.com/MVDB0110/python/archive/master.zip --no-check-certificate --content-disposition --directory-prefix=/home/pi/Documents/Python/Miniproject
 unzip /home/pi/Documents/Python/Miniproject/python-master.zip -d /home/pi/Documents/Python/Miniproject
 rm /home/pi/Documents/Python/Miniproject/python-master.zip
