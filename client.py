@@ -20,8 +20,6 @@ groen = 25
 button1 = 18
 button2 = 23
 buz = 16
-i = 0
-aftellen = 10
 afgeteld = 0
 
 GPIO.setwarnings(False)
@@ -38,6 +36,8 @@ GPIO.output(geel, False)
 
 while True:
     if GPIO.input(button1) == GPIO.HIGH:
+        i = 0
+        aftellen = 10
         if afgeteld == 0:
             GPIO.output(geel, True)
             GPIO.output(groen, False)
