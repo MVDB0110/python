@@ -22,10 +22,10 @@ GPIO.output(rood, False)
 GPIO.output(geel, False)
 
 while True:
-    i = 0
-    aftellen = 10
     if GPIO.input(button1) == GPIO.HIGH:
         if aftellen != True
+            i = 0
+            aftellen = 10
             GPIO.output(geel, True)
             while i < aftellen:
                 i = i + 1
