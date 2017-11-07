@@ -37,7 +37,7 @@ GPIO.output(geel, False)
 
 while True:
     if GPIO.input(button1) == GPIO.HIGH:
-        if aftellen != "True"
+        if aftellen != "True":
             GPIO.output(geel, True)
             GPIO.output(groen, False)
             GPIO.output(rood, False)
