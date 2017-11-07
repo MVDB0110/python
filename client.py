@@ -25,34 +25,35 @@ while True:
     i = 0
     aftellen = 10
     if GPIO.input(button1) == GPIO.HIGH:
-        GPIO.output(geel, True)
-        while i < aftellen:
-            i = i + 1
-            sleep(1)
-            print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
-            if GPIO.input(button2) == GPIO.HIGH:
-                break
-        if aftellen == True:
-            print("Alarm is al ingezet")
-
-        if i == aftellen:
-            aftellen = True
-            GPIO.output(rood, True)
-            GPIO.output(geel, False)
-            GPIO.output(groen, False)
-            stuur_bericht("1")
-            while True:
-                GPIO.output(buz, True)
-                sleep(0.001)
-                GPIO.output(buz, False)
-                sleep(0.001)
+        if aftellen != True
+            GPIO.output(geel, True)
+            while i < aftellen:
+                i = i + 1
+                sleep(1)
+                print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
                 if GPIO.input(button2) == GPIO.HIGH:
                     break
 
+            if i == aftellen:
+                aftellen = True
+                GPIO.output(rood, True)
+                GPIO.output(geel, False)
+                GPIO.output(groen, False)
+                stuur_bericht("1")
+                while True:
+                    GPIO.output(buz, True)
+                    sleep(0.001)
+                    GPIO.output(buz, False)
+                    sleep(0.001)
+                    if GPIO.input(button2) == GPIO.HIGH:
+                        break
+
+            else:
+                GPIO.output(rood, False)
+                GPIO.output(geel, False)
+                GPIO.output(groen, True)
         else:
-            GPIO.output(rood, False)
-            GPIO.output(geel, False)
-            GPIO.output(groen, True)
+            print("Alarm is al ingezet")
 
     if GPIO.input(button2) == GPIO.HIGH:
         if i == aftellen:
