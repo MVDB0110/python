@@ -75,3 +75,4 @@ while True:
     if GPIO.input(button2) == GPIO.HIGH:
         if i == aftellen:
             print("Alarm kan niet afgezet worden!")
+            sleep(1)
