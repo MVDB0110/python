@@ -22,6 +22,7 @@ button2 = 23
 buz = 16
 i = 0
 aftellen = 10
+afgeteld = 0
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -37,7 +38,7 @@ GPIO.output(geel, False)
 
 while True:
     if GPIO.input(button1) == GPIO.HIGH:
-        if aftellen != "True":
+        if afgeteld == 0:
             GPIO.output(geel, True)
             GPIO.output(groen, False)
             GPIO.output(rood, False)
@@ -50,7 +51,7 @@ while True:
                     break
 
             if i == aftellen:
-                aftellen = "True"
+                afgeteld = 1
                 GPIO.output(rood, True)
                 GPIO.output(geel, False)
                 GPIO.output(groen, False)
