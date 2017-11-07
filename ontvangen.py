@@ -5,9 +5,10 @@ def ontvangen():
     while True:
         try:
             s = socket.socket()
-            s.connect(('localhost', 12345))
+            s.connect(('192.168.42.1', 12345))
             s.close
             return s.recv(1024)
+            break
         except:
             print('Geen alarmcode ontvangen.')
-            sleep(45)
+            sleep(15)
