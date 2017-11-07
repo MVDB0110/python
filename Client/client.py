@@ -22,12 +22,12 @@ while True:
     aftellen = 10
     if GPIO.input(button1) == GPIO.HIGH:
         GPIO.output(geel, True)
-    while i < aftellen:
-        i = i + 1
-        sleep(1)
-        print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
-        if GPIO.input(button2) == GPIO.HIGH:
-            break
+        while i < aftellen:
+            i = i + 1
+            sleep(1)
+            print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
+            if GPIO.input(button2) == GPIO.HIGH:
+                break
     GPIO.output(rood, True)
     GPIO.output(groen, False)
     while True:
