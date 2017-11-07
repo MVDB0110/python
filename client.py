@@ -52,7 +52,6 @@ while True:
 
             if i == aftellen:
                 afgeteld = 1
-                print("afgeteld is 1")
                 GPIO.output(rood, True)
                 GPIO.output(geel, False)
                 GPIO.output(groen, False)
