@@ -18,6 +18,8 @@ GPIO.setup(rood, GPIO.OUT)
 GPIO.setup(geel, GPIO.OUT)
 GPIO.setup(groen, GPIO.OUT)
 GPIO.output(groen, True)
+GPIO.output(rood, False)
+GPIO.output(geel, False)
 
 while True:
     i = 0
