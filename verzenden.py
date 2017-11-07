@@ -7,7 +7,7 @@ def stuur_bericht(bericht):
 
     while True:
         c, addr = s.accept()
-        print 'Ik heb verbinding met: ', addr
+        print('Ik heb verbinding met: ', addr)
         c.send(bericht)
         c.close()
         break

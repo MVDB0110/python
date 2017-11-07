@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from time import sleep
+from verzenden import *
 
 rood = 21
 geel = 24
@@ -34,6 +35,7 @@ while True:
             GPIO.output(rood, True)
             GPIO.output(geel, False)
             GPIO.output(groen, False)
+            stuur_bericht("1")
             while True:
                 GPIO.output(buz, True)
                 sleep(0.001)
