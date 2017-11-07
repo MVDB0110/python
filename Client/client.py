@@ -17,6 +17,7 @@ GPIO.setup(rood, GPIO.OUT)
 GPIO.setup(geel, GPIO.OUT)
 GPIO.setup(groen, GPIO.OUT)
 GPIO.output(groen, True)
+
 while True:
     i = 0
     aftellen = 10
@@ -28,15 +29,24 @@ while True:
             print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
             if GPIO.input(button2) == GPIO.HIGH:
                 break
-        GPIO.output(rood, True)
-        GPIO.output(groen, False)
-        while True:
-            GPIO.output(buz, True)
-            sleep(0.001)
-            GPIO.output(buz, False)
-            sleep(0.001)
-            if GPIO.input(button2) == GPIO.HIGH:
-                break
+
+        if i == aftellen:
+            GPIO.output(rood, True)
+            GPIO.output(geel, False)
+            GPIO.output(groen, False)
+            while True:
+                GPIO.output(buz, True)
+                sleep(0.001)
+                GPIO.output(buz, False)
+                sleep(0.001)
+                if GPIO.input(button2) == GPIO.HIGH:
+                    break
+                    
+        else:
+            GPIO.output(rood, False)
+            GPIO.output(geel, False)
+            GPIO.output(groen, True)
+
     if GPIO.input(button2) == GPIO.HIGH:
         if i == aftellen:
             print("Alarm kan niet afgezet worden!")
