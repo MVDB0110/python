@@ -41,7 +41,7 @@ while True:
                 sleep(0.001)
                 if GPIO.input(button2) == GPIO.HIGH:
                     break
-                    
+
         else:
             GPIO.output(rood, False)
             GPIO.output(geel, False)
@@ -50,7 +50,3 @@ while True:
     if GPIO.input(button2) == GPIO.HIGH:
         if i == aftellen:
             print("Alarm kan niet afgezet worden!")
-        else:
-            GPIO.output(groen, True)
-            GPIO.output(rood, False)
-            GPIO.output(buz, False)
