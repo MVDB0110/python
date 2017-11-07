@@ -70,6 +70,7 @@ while True:
                 GPIO.output(groen, True)
         else:
             print("Alarm is al ingezet")
+            sleep(1)
 
     if GPIO.input(button2) == GPIO.HIGH:
         if i == aftellen:
