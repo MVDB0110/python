@@ -11,4 +11,3 @@ def ontvangen():
         except:
             print('Geen alarmcode ontvangen.')
             sleep(45)
-            return 0
