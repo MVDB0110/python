@@ -17,7 +17,50 @@ def init():
     GPIO.output(groen, True) #Groene lampje wordt aangezet
     GPIO.output(rood, False) #Rode lampje wordt aangezet
     GPIO.output(geel, False) #Gele lampje wordt aangezet
+    alarm()
     #GPIO initialiseren
+
+def alarm():
+    while True:
+        i = 0
+        aftellen = 10
+        if GPIO.input(button1) == GPIO.HIGH:
+            if afgeteld == 0:  # Kijken of alarm getriggerd is
+                GPIO.output(geel, True)
+                GPIO.output(groen, False)
+                # Het gele lampje gaat aan en de groene uit
+
+                while i < aftellen:  # Aftellen voordat alarm initieerd
+                    i = i + 1
+                    sleep(1)
+                    print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
+                    if GPIO.input(button2) == GPIO.HIGH:
+                        break
+
+                if i == aftellen:  # Als afgeteld is wordt deze code uitgevoerd
+                    afgeteld = 1
+                    GPIO.output(rood, True)
+                    GPIO.output(geel, False)
+                    GPIO.output(groen, False)
+                    # Het rode lampje gaat aan en de andere uit.
+                    stuur_bericht("1")  # Stuur bericht naar server.
+                    ontvangen()
+                    buz_thread.start()
+
+                else:
+                    GPIO.output(rood, False)
+                    GPIO.output(geel, False)
+                    GPIO.output(groen, True)
+                    # Als niet afgeteld is naar standaard lampen code
+            else:
+                print("Alarm is al ingezet")
+                sleep(1)
+
+        if GPIO.input(button2) == GPIO.HIGH:
+            if i == aftellen:
+                print("Alarm kan niet afgezet worden!")
+                buz_thread.cancel()
+                sleep(1)
 
 def buzzer():
     buz_thread.start()
@@ -62,44 +105,3 @@ GPIO.setup(rood, GPIO.OUT) #Het rode lampje
 GPIO.setup(geel, GPIO.OUT) #Het gele lampje
 GPIO.setup(groen, GPIO.OUT) #Het groene lampje
 init()
-
-while True:
-    i = 0
-    aftellen = 10
-    if GPIO.input(button1) == GPIO.HIGH:
-        if afgeteld == 0: #Kijken of alarm getriggerd is
-            GPIO.output(geel, True)
-            GPIO.output(groen, False)
-            #Het gele lampje gaat aan en de groene uit
-
-            while i < aftellen: #Aftellen voordat alarm initieerd
-                i = i + 1
-                sleep(1)
-                print("Nog " + str(aftellen - i) + " seconden voordat alarm afgaat!")
-                if GPIO.input(button2) == GPIO.HIGH:
-                    break
-
-            if i == aftellen: #Als afgeteld is wordt deze code uitgevoerd
-                afgeteld = 1
-                GPIO.output(rood, True)
-                GPIO.output(geel, False)
-                GPIO.output(groen, False)
-                #Het rode lampje gaat aan en de andere uit.
-                stuur_bericht("1") #Stuur bericht naar server.
-                ontvang_thread.start()
-                buz_thread.start()
-
-            else:
-                GPIO.output(rood, False)
-                GPIO.output(geel, False)
-                GPIO.output(groen, True)
-                #Als niet afgeteld is naar standaard lampen code
-        else:
-            print("Alarm is al ingezet")
-            sleep(1)
-
-    if GPIO.input(button2) == GPIO.HIGH: 
-        if i == aftellen:
-            print("Alarm kan niet afgezet worden!")
-            buz_thread.cancel()
-            sleep(1)
