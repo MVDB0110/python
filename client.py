@@ -25,7 +25,7 @@ buz = 16
 afgeteld = 0
 i = 0
 aftellen = 10
-#Variabelen
+#Variabelen aanmaken
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
