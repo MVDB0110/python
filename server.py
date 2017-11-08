@@ -14,7 +14,6 @@ def knop_gedrukt():
     button.pack_forget()
 
 def ontvangen():
-    threading.Timer(15.0, ontvangen).start()
     try:
         s = socket.socket()
         s.connect((host, 12345))
@@ -22,12 +21,12 @@ def ontvangen():
         s.close()
         var.set("Alarm gaat af op client.")
         print("Alarm gaat af op client.")
-        threadontvang.cancel()
         button.pack()
 
     except:
         var.set("Alarm gaat niet af op client.")
         print("Alarm gaat niet af op client.")
+        threading.Timer(15.0, ontvangen).start()
 
 var.set("Alarm gaat niet af op client.")
 
