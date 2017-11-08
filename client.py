@@ -3,7 +3,7 @@ from time import sleep
 import socket
 import threading
 
-host='192.168.3.139'
+host = '192.168.3.139'
 rood = 21
 geel = 24
 groen = 25

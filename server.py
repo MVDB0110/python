@@ -3,10 +3,11 @@ import threading
 from tkinter import *
 from time import sleep
 
-host = '192.168.3.241'
+host = 'raspbian_mike'
+var = StringVar()
+
 root = Tk()
 root.title("Dashboard")
-var = StringVar()
 
 def stuur_bericht(bericht):
     s = socket.socket()  # Socket aanmaken
