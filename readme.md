@@ -1,5 +1,5 @@
 *------Alarm------*
-Om dit alarm te kunnen gebruiken zal u 2 raspberry's moeten kunnen inzetten.
+Om dit alarm te kunnen gebruiken zal u 2 raspberry's moeten kunnen inzetten
 Dit alarm is gebaseerd op Python, u kan Python3 of Python2 gebruiken voor de de raspberry die het alarm moet gaan runnen, maar u zal Python3 moeten gebruiken voor de server.
 Het alarm kan worden geinstalleerd via het script dat te downloaden is op deze pagina.
 Het script kan worden uitgevoerd met bash, bash /path/to/file/script.sh
