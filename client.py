@@ -10,7 +10,6 @@ groen = 25
 button1 = 18
 button2 = 23
 buz = 16
-afgeteld = 0
 #Variabelen aanmaken
 
 def init():
@@ -24,6 +23,7 @@ def alarm():
     while True:
         i = 0
         aftellen = 10
+        afgeteld = 0
         if GPIO.input(button1) == GPIO.HIGH:
             if afgeteld == 0:  # Kijken of alarm getriggerd is
                 GPIO.output(geel, True)
