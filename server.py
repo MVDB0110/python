@@ -10,11 +10,11 @@ host = 'raspbian_mike'
 var = StringVar()
 
 def knop_gedrukt():
-    threadontvang.start()
+    ontvangen()
     button.pack_forget()
 
 def ontvangen():
-    threadontvang.start()
+    threading.Timer(15.0, ontvangen).start()
     try:
         s = socket.socket()
         s.connect((host, 12345))
@@ -28,8 +28,6 @@ def ontvangen():
     except:
         var.set("Alarm gaat niet af op client.")
         print("Alarm gaat niet af op client.")
-
-threadontvang = threading.Timer(15.0, ontvangen)
 
 var.set("Alarm gaat niet af op client.")
 
