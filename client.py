@@ -3,7 +3,6 @@ from time import sleep
 import socket
 import threading
 
-host = 'MonotonePi'
 rood = 21
 geel = 24
 groen = 25
@@ -44,10 +43,13 @@ def alarm():
                     GPIO.output(groen, False)
                     # Het rode lampje gaat aan en de andere uit.
                     stuur_bericht("1")  # Stuur bericht naar server.
-                    buzz.start()
                     while True:
-                        ontving = ontvangen()
-                        if ontving == '1':
+                        GPIO.output(buz, True)
+                        sleep(0.001)
+                        GPIO.output(buz, False)
+                        sleep(0.001)
+                        if GPIO.input(button2) == GPIO.HIGH:
+                            print("Alarm is afgezet")
                             break
                     init()
                 else:
@@ -64,37 +66,22 @@ def alarm():
                 print("Alarm kan niet afgezet worden!")
                 sleep(1)
 
-def buzzer():
-    GPIO.output(buz, True)
-    sleep(0.001)
-    GPIO.output(buz, False)
-    sleep(0.001)
-
 def stuur_bericht(bericht):
     s = socket.socket()  # Socket aanmaken
     s.bind(('', 12345))
     s.listen(5)  # Luister naar alle adressen die de raspberry heeft
     #Wachten tot de server het bericht opvangt
     while True:
-        c, addr = s.accept() #Accepteer alle verbindingen
-        print('Ik heb verbinding met: ', addr)
-        c.send(bericht)
-        c.close()
-        break
+        try:
+            c, addr = s.accept() #Accepteer alle verbindingen
+            print('Ik heb verbinding met: ', addr)
+            c.send(bericht)
+            c.close()
+            break
+        except:
+            print("Bericht kan nog niet verstuurd worden.")
+            sleep(1)
 
-def ontvangen():
-    try:
-        s = socket.socket()
-        s.connect((host, 12345))
-        s.close()
-        s.recv(1024)
-        ontvang_thread.cancel()
-        init()
-
-    except:
-        print("Server heeft geen code gestuurd voor afzetten")
-
-buzz = threading.Timer(0.1, buzzer)
 GPIO.setwarnings(False) #GPIO
 GPIO.setmode(GPIO.BCM) #GPIO BCM mode (GPIO layout)
 GPIO.setup(buz, GPIO.OUT) #Buzzer die afgaat wanneer alarm afgaat
