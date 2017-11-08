@@ -15,7 +15,7 @@ def knop_gedrukt():
 def ontvangen():
     try:
         s = socket.socket()
-        s.connect((host, 12346))
+        s.connect((host, 12347))
         s.recv(1024)#Return waarde 1 wanneer socket verbinding heeft.
         s.close()
         var.set("Alarm gaat af op client.")
