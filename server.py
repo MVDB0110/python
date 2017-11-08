@@ -13,6 +13,5 @@ def ontvangen():
 
     except:
         return '0'
-        sleep(15)
 
 print(json.dumps(ontvangen()))
