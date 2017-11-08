@@ -1,7 +1,9 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import socket
+import threading
 
+host='192.168.3.139'
 rood = 21
 geel = 24
 groen = 25
@@ -11,7 +13,23 @@ buz = 16
 afgeteld = 0
 #Variabelen aanmaken
 
+def init():
+    GPIO.output(groen, True) #Groene lampje wordt aangezet
+    GPIO.output(rood, False) #Rode lampje wordt aangezet
+    GPIO.output(geel, False) #Gele lampje wordt aangezet
+    #GPIO initialiseren
+
+def buzzer():
+    buz_thread.start()
+    GPIO.output(buz, True)
+    sleep(0.001)
+    GPIO.output(buz, False)
+    sleep(0.001)
+
 def stuur_bericht(bericht):
+    s = socket.socket()  # Socket aanmaken
+    s.bind(('', 12345))
+    s.listen(5)  # Luister naar alle adressen die de raspberry heeft
     #Wachten tot de server het bericht opvangt
     while True:
         c, addr = s.accept() #Accepteer alle verbindingen
@@ -20,11 +38,21 @@ def stuur_bericht(bericht):
         c.close()
         break
 
+def ontvangen():
+    ontvang_thread.start()
+    try:
+        s = socket.socket()
+        s.connect((host, 12345))
+        s.close()
+        s.recv(1024)
+        ontvang_thread.cancel()
+        init()
 
-s = socket.socket() #Socket aanmaken
-s.bind(('', 12345))
-s.listen(5) #Luister naar alle adressen die de raspberry heeft
+    except:
+        print("Server heeft geen code gestuurd voor afzetten")
 
+ontvang_thread = threading.Timer(15.0, ontvangen)
+buz_thread = threading.Timer(0.1, buzzer)
 GPIO.setwarnings(False) #GPIO
 GPIO.setmode(GPIO.BCM) #GPIO BCM mode (GPIO layout)
 GPIO.setup(buz, GPIO.OUT) #Buzzer die afgaat wanneer alarm afgaat
@@ -33,10 +61,7 @@ GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Button die alarm uitzet.
 GPIO.setup(rood, GPIO.OUT) #Het rode lampje
 GPIO.setup(geel, GPIO.OUT) #Het gele lampje
 GPIO.setup(groen, GPIO.OUT) #Het groene lampje
-GPIO.output(groen, True) #Groene lampje wordt aangezet
-GPIO.output(rood, False) #Rode lampje wordt aangezet
-GPIO.output(geel, False) #Gele lampje wordt aangezet
-#GPIO initialiseren
+init()
 
 while True:
     i = 0
@@ -61,13 +86,8 @@ while True:
                 GPIO.output(groen, False)
                 #Het rode lampje gaat aan en de andere uit.
                 stuur_bericht("1") #Stuur bericht naar server.
-                while True: #Deze loop zorgt voor de buzzer
-                    GPIO.output(buz, True)
-                    sleep(0.001)
-                    GPIO.output(buz, False)
-                    sleep(0.001)
-                    if GPIO.input(button2) == GPIO.HIGH:
-                        break
+                ontvang_thread.start()
+                buz_thread.start()
 
             else:
                 GPIO.output(rood, False)
@@ -81,4 +101,5 @@ while True:
     if GPIO.input(button2) == GPIO.HIGH: 
         if i == aftellen:
             print("Alarm kan niet afgezet worden!")
+            buz_thread.cancel()
             sleep(1)
