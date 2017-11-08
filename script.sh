@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -r -f /home/pi/Documents/Python/Miniproject
 mkdir -p /home/pi/Documents/Python/Miniproject
 sudo apt-get install python-rpi.gpio python3-rpi.gpio -y
 wget https://github.com/MVDB0110/python/archive/master.zip --no-check-certificate --content-disposition --directory-prefix=/home/pi/Documents/Python/Miniproject
