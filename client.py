@@ -3,7 +3,7 @@ from time import sleep
 import socket
 import threading
 
-host = '192.168.3.139'
+host = 'MonotonePi'
 rood = 21
 geel = 24
 groen = 25
@@ -45,8 +45,13 @@ def alarm():
                     # Het rode lampje gaat aan en de andere uit.
                     stuur_bericht("1")  # Stuur bericht naar server.
                     ontvangen()
-                    buz_thread.start()
-
+                    while True:
+                        GPIO.output(buz, True)
+                        sleep(0.001)
+                        GPIO.output(buz, False)
+                        sleep(0.001)
+                        if GPIO.input(button2) == GPIO.HIGH:
+                            break
                 else:
                     GPIO.output(rood, False)
                     GPIO.output(geel, False)
@@ -59,15 +64,7 @@ def alarm():
         if GPIO.input(button2) == GPIO.HIGH:
             if i == aftellen:
                 print("Alarm kan niet afgezet worden!")
-                buz_thread.cancel()
                 sleep(1)
-
-def buzzer():
-    buz_thread.start()
-    GPIO.output(buz, True)
-    sleep(0.001)
-    GPIO.output(buz, False)
-    sleep(0.001)
 
 def stuur_bericht(bericht):
     s = socket.socket()  # Socket aanmaken
