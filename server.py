@@ -6,7 +6,7 @@ from time import sleep
 root = Tk()
 root.title("Dashboard")
 
-host = '192.168.3.241'
+host = 'raspbian_mike'
 
 def knop_gedrukt():
     ontvangen()
