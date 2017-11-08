@@ -31,6 +31,8 @@ def ontvangen():
 threadontvang = threading.Timer(15.0, ontvangen)
 threadontvang.start()
 
+var.set("Alarm gaat niet af op client.")
+
 button = Button(root, text="Alarm is afgezet.", command=knop_gedrukt)
 text = Label(root, textvariable=var)
 text.pack()
