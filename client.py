@@ -92,7 +92,6 @@ def ontvangen():
         print("Server heeft geen code gestuurd voor afzetten")
 
 ontvang_thread = threading.Timer(15.0, ontvangen)
-buz_thread = threading.Timer(0.1, buzzer)
 GPIO.setwarnings(False) #GPIO
 GPIO.setmode(GPIO.BCM) #GPIO BCM mode (GPIO layout)
 GPIO.setup(buz, GPIO.OUT) #Buzzer die afgaat wanneer alarm afgaat
