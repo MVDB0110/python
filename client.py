@@ -71,16 +71,13 @@ def stuur_bericht(bericht):
     s.bind(('', 12345))
     s.listen(5)  # Luister naar alle adressen die de raspberry heeft
     #Wachten tot de server het bericht opvangt
+    print("Bericht versturen...")
     while True:
-        try:
-            c, addr = s.accept() #Accepteer alle verbindingen
-            print('Ik heb verbinding met: ', addr)
-            c.send(bericht)
-            c.close()
-            break
-        except:
-            print("Bericht kan nog niet verstuurd worden.")
-            sleep(1)
+        c, addr = s.accept() #Accepteer alle verbindingen
+        print('Server: ' + addr[0] + " heeft het bericht ontvangen")
+        c.send(bericht)
+        c.close()
+        break
 
 GPIO.setwarnings(False) #GPIO
 GPIO.setmode(GPIO.BCM) #GPIO BCM mode (GPIO layout)
