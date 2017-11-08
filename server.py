@@ -9,7 +9,7 @@ def ontvangen():
         s = socket.socket()
         s.connect((host, 12345))
         s.close
-        return s.recv(1024)
+        return s.recv(1024)#Return waarde 1 wanneer socket verbinding heeft.
 
     except:
         return '0'
