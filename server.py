@@ -3,7 +3,7 @@ import threading
 from tkinter import *
 from time import sleep
 
-host = 'raspbian_mike'
+host = '192.168.3.241'
 
 root = Tk()
 root.title("Dashboard")
