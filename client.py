@@ -67,6 +67,9 @@ def alarm():
                 sleep(1)
 
 def stuur_bericht(bericht):
+    s = socket.socket()  # Socket aanmaken
+    s.bind(('', 12346))
+    s.listen(5)  # Luister naar alle adressen die de raspberry heeft
     #Wachten tot de server het bericht opvangt
     print("Bericht versturen...")
     while True:
@@ -74,6 +77,7 @@ def stuur_bericht(bericht):
         print('Server: ' + addr[0] + " heeft het bericht ontvangen")
         c.send(bericht)
         c.close()
+        s.close()
         break
 
 GPIO.setwarnings(False) #GPIO
@@ -84,9 +88,5 @@ GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Button die alarm uitzet.
 GPIO.setup(rood, GPIO.OUT) #Het rode lampje
 GPIO.setup(geel, GPIO.OUT) #Het gele lampje
 GPIO.setup(groen, GPIO.OUT) #Het groene lampje
-
-s = socket.socket()  # Socket aanmaken
-s.bind(('', 12346))
-s.listen(5)  # Luister naar alle adressen die de raspberry heeft
 
 init()
