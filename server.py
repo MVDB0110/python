@@ -1,11 +1,14 @@
 import socket
+import json
 from time import sleep
+
+host = 'raspbian_mike'
 
 def ontvangen():
     while True:
         try:
             s = socket.socket()
-            s.connect(('192.168.3.241', 12345))
+            s.connect((host, 12345))
             s.close
             return s.recv(1024)
             break
@@ -13,4 +16,4 @@ def ontvangen():
             print('Geen alarmcode ontvangen.')
             sleep(15)
 
-print(ontvangen())
+print(json.dumps(ontvangen()))
