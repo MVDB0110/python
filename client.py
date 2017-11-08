@@ -73,6 +73,7 @@ def stuur_bericht(bericht):
         c, addr = s.accept() #Accepteer alle verbindingen
         print('Server: ' + addr[0] + " heeft het bericht ontvangen")
         c.send(bericht)
+        c.close()
         break
 
 GPIO.setwarnings(False) #GPIO
