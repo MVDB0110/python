@@ -4,10 +4,10 @@ from tkinter import *
 from time import sleep
 
 host = 'raspbian_mike'
-var = StringVar()
 
 root = Tk()
 root.title("Dashboard")
+var = StringVar()
 
 def stuur_bericht(bericht):
     s = socket.socket()  # Socket aanmaken
