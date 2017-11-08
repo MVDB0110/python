@@ -44,14 +44,15 @@ def alarm():
                     GPIO.output(groen, False)
                     # Het rode lampje gaat aan en de andere uit.
                     stuur_bericht("1")  # Stuur bericht naar server.
-                    ontvangen()
                     while True:
                         GPIO.output(buz, True)
                         sleep(0.001)
                         GPIO.output(buz, False)
                         sleep(0.001)
-                        if GPIO.input(button2) == GPIO.HIGH:
+                        ontving = ontvangen()
+                        if ontving == '1':
                             break
+                    init()
                 else:
                     GPIO.output(rood, False)
                     GPIO.output(geel, False)
@@ -79,7 +80,6 @@ def stuur_bericht(bericht):
         break
 
 def ontvangen():
-    ontvang_thread.start()
     try:
         s = socket.socket()
         s.connect((host, 12345))
@@ -91,7 +91,6 @@ def ontvangen():
     except:
         print("Server heeft geen code gestuurd voor afzetten")
 
-ontvang_thread = threading.Timer(15.0, ontvangen)
 GPIO.setwarnings(False) #GPIO
 GPIO.setmode(GPIO.BCM) #GPIO BCM mode (GPIO layout)
 GPIO.setup(buz, GPIO.OUT) #Buzzer die afgaat wanneer alarm afgaat
