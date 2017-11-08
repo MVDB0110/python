@@ -3,6 +3,7 @@ from time import sleep
 import socket
 
 def stuur_bericht(bericht):
+    #Wachten tot de server het bericht opvangt
     while True:
         c, addr = s.accept()
         print('Ik heb verbinding met: ', addr)
@@ -13,6 +14,7 @@ def stuur_bericht(bericht):
 s = socket.socket()
 s.bind(('', 12345))
 s.listen(5)
+#Socket aanmaken
 
 rood = 21
 geel = 24
@@ -21,6 +23,9 @@ button1 = 18
 button2 = 23
 buz = 16
 afgeteld = 0
+i = 0
+aftellen = 10
+#Variabelen
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -33,11 +38,10 @@ GPIO.setup(groen, GPIO.OUT)
 GPIO.output(groen, True)
 GPIO.output(rood, False)
 GPIO.output(geel, False)
+#GPIO initialiseren
 
 while True:
     if GPIO.input(button1) == GPIO.HIGH:
-        i = 0
-        aftellen = 10
         if afgeteld == 0:
             GPIO.output(geel, True)
             GPIO.output(groen, False)
