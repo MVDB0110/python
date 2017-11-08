@@ -86,7 +86,7 @@ GPIO.setup(geel, GPIO.OUT) #Het gele lampje
 GPIO.setup(groen, GPIO.OUT) #Het groene lampje
 
 s = socket.socket()  # Socket aanmaken
-s.bind(('', 12345))
+s.bind(('', 12346))
 s.listen(5)  # Luister naar alle adressen die de raspberry heeft
 
 init()
