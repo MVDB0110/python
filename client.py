@@ -68,6 +68,7 @@ def alarm():
 
 def stuur_bericht(bericht):
     s = socket.socket()  # Socket aanmaken
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(('', 12347))
     s.listen(5)  # Luister naar alle adressen die de raspberry heeft
     #Wachten tot de server het bericht opvangt
