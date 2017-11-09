@@ -5,7 +5,7 @@ from tkinter import *
 root = Tk() #'Master' window
 root.title("Dashboard") #Titel van window
 
-host = "raspbianmbrink" #Hostname van client.
+host = "raspbianmbrink.local" #Hostname van client.
 
 def knop_gedrukt():
     ontvangen() #Ontvangen initieren
