@@ -25,7 +25,7 @@ def ontvangen():
     except:
         var.set("Alarm gaat niet af op client.") #Pas text aan op GUI
         print("Alarm gaat niet af op client.") #Print text in console
-        threading.Timer(15.0, ontvangen).start() #Start timer op ontvangen()
+        threading.Timer(5.0, ontvangen).start() #Start timer op ontvangen()
 
 button = Button(root, text="Alarm is afgezet.", command=knop_gedrukt) #Button definieren
 var = StringVar() #Statement van variabele text in Label
