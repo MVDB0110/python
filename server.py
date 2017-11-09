@@ -14,7 +14,7 @@ def knop_gedrukt():
     #Standaard situatie herstellen
 
 def ontvangen():
-    host_online = os.system("ping -c 1 " + host) #Kijken of host online is.
+    host_online = os.system("ping -c 1 " + host) #Kijken of host online is
     if host_online == 0:
         try:
             s = socket.socket() #Maak socket

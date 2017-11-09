@@ -64,9 +64,9 @@ def alarm():
                     print("Alarm is al ingezet")
                     sleep(1)
         else:
-            GPIO.output(rood, True)  # Rood aan
-            GPIO.output(geel, False)  # Geel uit
-            GPIO.output(groen, False)  # Groen uit
+            GPIO.output(rood, True)  # Rode lampje aan
+            GPIO.output(geel, False)  # Gele lampje uit
+            GPIO.output(groen, False)  # Groene lampje uit
             # Het rode lampje gaat aan en de andere uit.
             stuur_bericht("1")  # Stuur bericht naar server.
             while True:  # Buzzer loop
