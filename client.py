@@ -8,6 +8,8 @@ groen = 25 #GPIO port 25
 button1 = 18 #GPIO port 18
 button2 = 23 #GPIO port 23
 buz = 16 #GPIO port 16
+buzzertijd = 0.001
+portnummer = 12347
 #Variabelen aanmaken
 
 def init():
@@ -44,9 +46,9 @@ def alarm():
                     stuur_bericht("1")  # Stuur bericht naar server.
                     while True: #Buzzer loop
                         GPIO.output(buz, True)
-                        sleep(0.001)
+                        sleep(buzzertijd)
                         GPIO.output(buz, False)
-                        sleep(0.001)
+                        sleep(buzzertijd)
                         if GPIO.input(button2) == GPIO.HIGH: #Alarm afzetten
                             print("Alarm is afgezet")
                             break
@@ -63,7 +65,7 @@ def alarm():
 def stuur_bericht(bericht):
     s = socket.socket()  # Socket aanmaken
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #Laat het programma de port en adres hergebruiken wanneer socket gesloten is
-    s.bind(('', 12347)) #Bind naar alle adressen die client te bieden heeft met port 12347
+    s.bind(('', portnummer)) #Bind naar alle adressen die client te bieden heeft met port 12347
     s.listen(5)  # Luister naar alle adressen die de raspberry heeft
     #Wachten tot de server het bericht opvangt
     print("Bericht versturen...")
