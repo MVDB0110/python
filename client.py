@@ -21,7 +21,7 @@ def init():
 
 def alarm():
     while True:
-        host_online = os.system("ping -c 1 " + host)  # Kijken of host online is.
+        host_online = os.system("ping -c 1 " + str(host))  # Kijken of host online is.
         if host_online == 0:
             i = 0 #Telwaarde definieren
             aftellen = 10 #Tellen tot waarde in deze variabele
