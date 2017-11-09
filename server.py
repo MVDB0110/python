@@ -5,7 +5,7 @@ from tkinter import *
 root = Tk() #'Master' window
 root.title("Dashboard") #Titel van window
 
-host = "192.168.3.241" #IP adres van client (Dit is variabel tenzij er een static ip aangegeven is)
+host = "raspbianmbrink" #Hostname van client.
 
 def knop_gedrukt():
     ontvangen() #Ontvangen initieren
