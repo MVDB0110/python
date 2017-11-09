@@ -16,7 +16,7 @@ def ontvangen():
     try:
         s = socket.socket() #Maak socket
         s.connect((socket.gethostbyname(host), 12347)) #Verbind met client
-        s.recv(1024)#Return waarde 1 wanneer socket verbinding heeft.
+        s.recv(1024)#Return waarde 1 wanneer socket verbinding heeft
         s.close() #Sluit socket
         var.set("Alarm gaat af op client.") #Pas text aan op GUI
         print("Alarm gaat af op client.") #Print text in console

@@ -78,7 +78,7 @@ def stuur_bericht(bericht):
 GPIO.setwarnings(False) #GPIO
 GPIO.setmode(GPIO.BCM) #GPIO BCM mode (GPIO layout)
 GPIO.setup(buz, GPIO.OUT) #Buzzer die afgaat wanneer alarm afgaat
-GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Button die alarm triggert, oftewel de deur gaat open.
+GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Button die alarm triggert, oftewel de deur gaat open
 GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Button die alarm uitzet.
 GPIO.setup(rood, GPIO.OUT) #Het rode lampje
 GPIO.setup(geel, GPIO.OUT) #Het gele lampje
